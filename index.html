@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout Page</title>
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 h-screen p-4">
+
+  <div id="content" class="h-full grid place-items-center">
+    <div class="max-w-7xl w-full flex flex-col-reverse md:flex-row gap-4">
+
+      <!-- Payment Section -->
+      <div id="payment-section" class="w-full md:w-1/2 bg-white p-6 rounded shadow-md">
+        <h2 class="text-2xl font-bold mb-4">Payment</h2>
+        <hr class="border">
+        <h4 class="font-bold mt-8">Pay With:</h4>
+        <div class="mb-4">
+          <label class="inline-flex items-center">
+            <input type="radio" name="payment-method" value="card" checked>
+            <span class="ml-2">Credit Card</span>
+          </label>
+          <label class="inline-flex items-center ml-4">
+            <input type="radio" name="payment-method" value="cod">
+            <span class="ml-2">Cash on Delivery</span>
+          </label>
+        </div>
+
+        <!-- Credit Card Form -->
+        <div id="card-payment-form">
+          <label for="card-number" class="font-semibold">Card Number</label>
+          <input id="card-number" type="text" placeholder="Card Number" maxlength="16"
+            class="w-full border rounded p-2 mb-2 mt-2">
+          <div class="flex justify-between">
+            <div>
+              <label for="expiry-date" class="font-semibold">Expiration Date</label>
+              <input id="expiry-date" type="month" placeholder="Expiry Date" class="w-full border rounded p-2 mb-2 mt-2">
+            </div>
+            <div>
+              <label for="cvv" class="font-semibold">CVV</label>
+              <input id="cvv" type="password" placeholder="CVV" maxlength="3" class="w-full border rounded p-2 mb-2 mt-2">
+            </div>
+          </div>
+          <label class="inline-flex items-center">
+            <input id="save-card" type="checkbox">
+            <span class="ml-2">Save Card Details</span>
+          </label>
+        </div>
+
+        <!-- COD Form -->
+        <div id="cod-payment-form" class="hidden">
+          <p>Cash on Delivery selected. You will pay when the package is delivered.</p>
+        </div>
+
+        <button id="pay-button" class="w-full bg-green-500 text-white p-2 rounded mt-4">Pay</button>
+      </div>
+
+      <!-- Order Summary Section -->
+      <div id="order-summary" class="w-full md:w-1/2 bg-white p-6 rounded shadow mb-4 md:mb-0">
+        <h2 class="text-2xl font-bold mb-4">Order Summary</h2>
+        <hr class="border my-6">
+        <div id="order-items" class="space-y-4">
+          <!-- Order items dynamically populated here -->
+        </div>
+        <hr class="border mt-6">
+        <!-- Coupon Code Section -->
+        <div class="mt-6 flex space-x-2">
+          <input id="discount-code" type="text" placeholder="Gift or discount code (eg. Marmeto)"
+            class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 w-full">
+          <button id="apply-button" disabled
+            class="p-2 bg-gray-300 text-gray-500 rounded-md cursor-not-allowed">
+            Apply
+          </button>
+        </div>
+        <div id="coupon-message" class="text-green-500 mt-2 hidden">Coupon applied successfully!</div>
+        <hr class="border mt-6">
+        <div class="mt-4">
+          <div class="flex justify-between">
+            <span>Subtotal:</span>
+            <span id="subtotal">$0.00</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Discounts:</span>
+            <span id="discounts">-$0.00</span>
+          </div>
+          <div id="coupon-discount" class="flex justify-between hidden">
+            <span>Coupon:</span>
+            <span id="coupon-amount">-$0.00</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Shipping:</span>
+            <span id="shipping">$0.00</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Tax:</span>
+            <span id="tax">$0.00</span>
+          </div>
+          <hr class="border mt-6">
+          <div class="flex justify-between font-bold text-lg mt-2">
+            <span>Total:</span>
+            <span id="total">$0.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thank You Page -->
+  <div id="thank-you-page" class="fixed inset-0 bg-gray-100 flex items-center justify-center hidden">
+    <div class="w-full md:w-2/3 lg:w-1/2 bg-white p-6 rounded shadow">
+      <h2 class="text-2xl font-bold" id="thankyou"></h2>
+      <div class=" text-center flex gap-3">
+        <p class="">confirmation</p>
+        <p id="order-id"></p>
+      </div>
+      <p class="font-bold mb-6">Your order is confirmed</p>
+      <div class="flex flex-col md:flex-row gap-6">
+        <div class="w-full md:w-1/2">
+          <h3 class="text-lg font-bold mb-2">Shipping Address</h3>
+          <p id="shipping-address" class="space-y-1"></p>
+        </div>
+        <div class="w-full md:w-1/2">
+          <h3 class="text-lg font-bold mb-2">Billing Address</h3>
+          <p id="billing-address" class="space-y-1"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+
+</html>
